@@ -1,6 +1,9 @@
 package vlu.android.readfilejson_02;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -42,8 +45,23 @@ public class MainActivity extends AppCompatActivity {
             lvDSNV=(ListView) findViewById(R.id.lvDSNV);
         //---------------------------
         // Doc du lieu tu json va hien thi tren LV
+        try {
+            dsnv = readJsonDSNV(filename);
+            setDataLV(dsnv);
 
+            adapter = new ArrayAdapter<>(MainActivity.this,
+                    androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+                    dataLV);
+            lvDSNV.setAdapter(adapter);
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        //-------------------------
+
+        addEvent();
     }
     //Doc du lieu tu JsonArrr
     ArrayList<NV> readJsonDSNV(String filename) throws IOException, JSONException {
@@ -61,13 +79,14 @@ public class MainActivity extends AppCompatActivity {
         JSONArray jsonArrayDSNV = jsonObjectDSNV.getJSONArray("dsnv");
         for(int i=0;i<jsonArrayDSNV.length();i++)
         {
-            NV nv=new NV();
+
             JSONObject object = jsonArrayDSNV.getJSONObject(i);
             String msnv = object.getString("msnv");
             String idAnh = object.getString("anh");
             String hten = object.getString("hten");
             String ngaysinh = object.getString("ngaysinh");
             String cvu = object.getString("cvu");
+            NV nv=new NV(msnv,idAnh,hten,ngaysinh,cvu);
             dsnv.add(nv);
         }
         //--------------------
@@ -75,12 +94,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setDataLV (ArrayList<NV> dsnv ) {
-        for (int i = 0; i < dsnv.size(); i++)
-        {
+        for (int i = 0; i < dsnv.size(); i++) {
             String st = "Msnv:  " + dsnv.get(i).getMsnv() + "--" + "Ho ten: " + dsnv.get(i).getHten();
             dataLV.add(st);
         }
+    }
 
-
-
+    void addEvent()
+    {
+        lvDSNV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                NV nv = dsnv.get(i);
+                Intent intent = new Intent(MainActivity.this,NVDetailActivity.class);
+                intent.putExtra("nhanvien",nv);
+                startActivity(intent);
+            }
+        });
+    }
 }

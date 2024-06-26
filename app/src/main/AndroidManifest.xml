@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ReadFileJSon_02"
         tools:targetApi="31">
         <activity
+            android:name=".NVDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
