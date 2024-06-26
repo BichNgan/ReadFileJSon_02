@@ -1,0 +1,32 @@
+{"dsnv":
+	[
+		{
+			"msnv":"NV01",
+			"anh":"nv1",
+			"hten":"Lý Thanh Lan",
+			"ngaysinh":"14/8/1997",
+			"cvu":"thu ngân"			
+		},
+		{
+			"msnv":"NV02",
+			"anh":"nv2",
+			"hten":"Trần Cẩm Nhung",
+			"ngaysinh":"10/8/1999",
+			"cvu":"trưởng phòng"
+		},
+		{
+			"msnv":"NV03",
+			"anh":"nv3",
+			"hten":"Nguyễn Văn Vinh",
+			"ngaysinh":"5/7/1994",
+			"cvu":"Kỹ thuật viên"
+		},
+		{
+			"msnv":"NV04",
+			"anh":"nv4",
+			"hten":"Phạm Hoàng Minh",
+			"ngaysinh":"15/7/1993",
+			"cvu":"Trưởng phòng"
+		}
+	]  
+}
